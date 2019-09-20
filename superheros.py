@@ -19,27 +19,42 @@ class Armor:
 
 
 class Hero:
-    def __init__(self, name, starting_health = 100):
+    def __init__(self, name, starting_health=100):
         self.name = name
-        self.health = starting_health
+        self.starting_health = starting_health
+        self.ability_list = []
+        self.attack_power = 0
 
     def current_health(self):
-        health_value = int(self.health)
-        return health_value
+        return self.starting_health
 
     def add_ability(self, ability):
-        pass
-
+        self.ability_list.append(ability)
         
+        self.attack_power += ability[1]
+
+
+    def abilities(self):
+        return self.ability_list
+
+    def attack(self):
+        pass
+        
+
 
 if __name__ == "__main__":
     # If you run this file from the terminal
     # this block is executed.
     
-    # ability = Ability("Debugging Ability", 20)
     # print(ability.name)
     # print(ability.attack())
-    
+   
+    ability = Ability("Great Debugging", 50)
+    another_ability = Ability("Smarty Pants", 90)
     my_hero = Hero("Grace Hopper", 200)
-    print(my_hero.name)
-    print(my_hero.current_health)
+    my_hero.add_ability(ability)
+    my_hero.add_ability(another_ability)
+    print(my_hero.attack())
+    
+    # print(my_hero.name)
+    # print(my_hero.current_health())
