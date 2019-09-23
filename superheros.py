@@ -30,15 +30,16 @@ class Hero:
 
     def add_ability(self, ability):
         self.ability_list.append(ability)
-        
-        self.attack_power += ability[1]
 
 
     def abilities(self):
         return self.ability_list
 
     def attack(self):
-        pass
+        damage_total = 0
+        for ability in self.abilities:
+            damage_total += ability.attack()
+        return damage_total 
         
 
 
