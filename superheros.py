@@ -1,3 +1,4 @@
+from random import randint
 import random
 
 class Ability:
@@ -17,6 +18,9 @@ class Armor:
         block_value = random.randint(0,self.max_block)
         return block_value
 
+class Weapon(Ability):
+    def attack(self):
+        return randint(self.max_damage // 2 , self.max_damage)
 
 class Hero:
     def __init__(self, name, starting_health=100):
@@ -76,6 +80,21 @@ class Hero:
         else:
             print("Draw!")    
 
+class Team():
+    def __init__(self,name):
+        self.name = name 
+        self.heroes = []
+
+    def remove_hero(self,name):
+        for hero in self.heroes:
+            if hero.name == name:
+                self.heroes.remove(hero)
+                return 
+        return 0
+    
+    def view_all_heroes(self):
+        for hero in self.heroes:
+            print(hero.name)
 
 if __name__ == "__main__":
     # If you run this file from the terminal
