@@ -1,4 +1,4 @@
-from random import randint
+from random import randint,choice
 import random
 
 class Ability:
@@ -29,8 +29,9 @@ class Hero:
         self.armors = []
         self.starting_health = starting_health
         self.current_health = starting_health
-        
         self.attack_power = 0
+        self.deaths = 0 
+        self.kills = 0
 
     # def current_health(self):
     #     return self.starting_health
@@ -75,10 +76,20 @@ class Hero:
                 print(f"{self.name} has {self.current_health} health.")
             if self.is_alive():
                 print(f"{self.name} wins!")
+                self.add_kill(1)
+                opponent.add_deaths(1)
             else:
                 print(f"{opponent.name} wins!")
+                self.add_deaths(1)
+                opponent.add_kill(1)
         else:
             print("Draw!")    
+
+    def add_kill(self, num_kills):
+        self.kills += num_kills
+    
+    def add_deaths(self, num_deaths):
+        self.deaths =+ num_deaths
 
 class Team():
     def __init__(self,name):
@@ -95,6 +106,41 @@ class Team():
     def view_all_heroes(self):
         for hero in self.heroes:
             print(hero.name)
+
+    def add_hero(self,hero):
+        self.heroes.append(hero)
+
+    def attack(self, other_team):
+        fighting = True
+        team_one = []
+        team_two = []
+
+        while fighting:
+            team_one.clear()
+            team_two.clear()
+            for hero in self.heroes:
+                if hero.is_alive():
+                    team_one.append(hero)
+            for hero in other_team.heroes:
+                if hero.is_alive():
+                    team_two.append(hero)
+            if len(team_one) <= 0 or len(team_two) <= 0:
+                fighting = False
+            else:
+                hero_one = choice(team_one)
+                hero_two = choice(team_two)
+                hero_one.fight(hero_two)
+
+    def revive_heroes(self, health = 100):
+        for hero in self.heroes:
+            hero.health = hero.starting_health
+    
+    def stats(self):
+        print(f"Name | Kill / Death")
+        for hero in self.heroes:
+            print(f"{hero.name} | {hero.kills} / {hero.deaths}")
+
+
 
 if __name__ == "__main__":
     # If you run this file from the terminal
