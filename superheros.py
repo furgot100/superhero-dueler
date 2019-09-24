@@ -21,25 +21,26 @@ class Armor:
 class Hero:
     def __init__(self, name, starting_health=100):
         self.name = name
+        self.armors = []
         self.starting_health = starting_health
-        self.ability_list = []
+        self.abilities= []
         self.attack_power = 0
 
     def current_health(self):
         return self.starting_health
 
     def add_ability(self, ability):
-        self.ability_list.append(ability)
+        self.abilities.append(ability)
 
 
-    def abilities(self):
-        return self.ability_list
+    # def abilities(self):
+    #     return self.ability_list
 
     def attack(self):
         damage_total = 0
         for ability in self.abilities:
             damage_total += ability.attack()
-        return damage_total 
+        return damage_total
         
 
 
