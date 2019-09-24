@@ -55,7 +55,26 @@ class Hero:
 
     def take_damage(self,damage):
         self.current_health -= (damage - self.defend())
+
+    def is_alive(self):
+        if self.current_health > 0:
+            return True
+        else:
+            return False
         
+    def fight(self,opponent):
+        if self.abilities != [] and opponent.abilities != []:
+            while self.is_alive() and opponent.is_alive():
+                opponent.take_damage(self.attack())
+                print(f"{opponent.name} has {opponent.current_health} health.")
+                self.take_damage(opponent.attack())
+                print(f"{self.name} has {self.current_health} health.")
+            if self.is_alive():
+                print(f"{self.name} wins!")
+            else:
+                print(f"{opponent.name} wins!")
+        else:
+            print("Draw!")    
 
 
 if __name__ == "__main__":
@@ -65,12 +84,17 @@ if __name__ == "__main__":
     # print(ability.name)
     # print(ability.attack())
    
-    ability = Ability("Great Debugging", 50)
-    another_ability = Ability("Smarty Pants", 90)
-    my_hero = Hero("Grace Hopper", 200)
-    my_hero.add_ability(ability)
-    my_hero.add_ability(another_ability)
-    print(my_hero.attack())
+    hero1 = Hero("Wonder Woman")
+    hero2 = Hero("Dumbledore")
+    ability1 = Ability("Super Speed", 300)
+    ability2 = Ability("Super Eyes", 130)
+    ability3 = Ability("Wizard Wand", 80)
+    ability4 = Ability("Wizard Beard", 20)
+    hero1.add_ability(ability1)
+    hero1.add_ability(ability2)
+    hero2.add_ability(ability3)
+    hero2.add_ability(ability4)
+    hero1.fight(hero2)
     
     # print(my_hero.name)
     # print(my_hero.current_health())
