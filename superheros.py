@@ -90,6 +90,9 @@ class Hero:
     
     def add_deaths(self, num_deaths):
         self.deaths =+ num_deaths
+    
+    def add_weapon(self, weapon):
+        self.abilities.append(weapon)
 
 class Team():
     def __init__(self,name):
@@ -140,7 +143,14 @@ class Team():
         for hero in self.heroes:
             print(f"{hero.name} | {hero.kills} / {hero.deaths}")
 
+class Arena():
+    def __init__(self):
+        self.team_one = []
+        self.team_two = []
 
+    def create_ability(self):
+        self.new_ability = input('Enter a new ability')
+        return self.create_ability
 
 if __name__ == "__main__":
     # If you run this file from the terminal
