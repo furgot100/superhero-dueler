@@ -152,6 +152,10 @@ class Arena():
         self.new_ability = input('Enter a new ability')
         return self.create_ability
 
+    def create_weapon(self):
+        self.new_weapon = input("Enter a new weapon")
+        
+
 if __name__ == "__main__":
     # If you run this file from the terminal
     # this block is executed.
