@@ -149,11 +149,25 @@ class Arena():
         self.team_two = []
 
     def create_ability(self):
-        self.new_ability = input('Enter a new ability')
-        return self.create_ability
+        new_ability = input('Enter a new ability: ')
+        max_damage = int(input("Enter Maximum damage: "))
+        ability = Ability(new_ability, max_damage)
+        return ability
 
     def create_weapon(self):
-        self.new_weapon = input("Enter a new weapon")
+        new_weapon = input("Enter a new weapon: ")
+        damage = int(input("Enter damage: "))
+        weapon = Weapon(new_weapon,damage)
+        return weapon
+
+    def create_armor(self):
+        new_armor = input("Enter new armor name: ")
+        block_stat = int(input("Enter block number: "))
+        armor = Armor(new_armor, block_stat)
+        return armor
+
+
+
         
 
 if __name__ == "__main__":
