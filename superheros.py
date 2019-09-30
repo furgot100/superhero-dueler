@@ -166,6 +166,46 @@ class Arena():
         armor = Armor(new_armor, block_stat)
         return armor
 
+    def create_hero(self):
+        name = input("Enter name of Hero: ")
+        health = int(input("Enter starting health of your Hero: "))
+        hero = Hero(name, health)
+        
+        user_ability = input("Does your Hero have abilities?(y/n): ")
+        while user_ability.isalpha == False:
+            user_ability = input("Does your Hero have abilities?(y/n): ")
+
+        if user_ability.lower()[0] == "y":
+            while not user_ability.isnumeric():
+                user_ability = input("How many abilities?: ")
+            
+            for _ in range(int(user_ability)):
+                hero.add_ability(self.create_ability)
+
+        user_weapon = input("Does your Hero have weapons?(y/n): ")
+        while user_ability.isalpha() == False:
+            user_weapon = input("Does your Hero have weapons?(y/n): ")
+        if user_weapon.lower()[0] == "y":
+            while not user_weapon.isnumeric():
+                user_weapon = input("How many? ")
+
+            for _ in range(int(user_weapon)):
+                hero.add_weapon(self.create_weapon())
+
+        user_armor = input("Does your Hero have armor?(y/n): ")
+        while user_armor.isalpha() == False:
+            user_armor = input("Does your Hero have armor?(y/n): ")
+        if user_armor.lower()[0] == "y":
+            while not user_armor.isnumeric():
+                armor_number = input("How many? ")
+
+            for _ in range(int(armor_number)):
+                hero.add_armor(self.create_armor())
+
+        return hero
+
+
+
 
 
         
