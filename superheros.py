@@ -175,76 +175,79 @@ class Arena():
         while user_ability.isalpha == False:
             user_ability = input("Does your Hero have abilities?(y/n): ")
 
-        if user_ability.lower()[0] == "y":
-            while not user_ability.isnumeric():
-                user_ability = input("How many abilities?: ")
-            
-            for _ in range(int(user_ability)):
-                hero.add_ability(self.create_ability)
-
         user_weapon = input("Does your Hero have weapons?(y/n): ")
         while user_ability.isalpha() == False:
             user_weapon = input("Does your Hero have weapons?(y/n): ")
-        if user_weapon.lower()[0] == "y":
-            while not user_weapon.isnumeric():
-                user_weapon = input("How many? ")
-
-            for _ in range(int(user_weapon)):
-                hero.add_weapon(self.create_weapon())
 
         user_armor = input("Does your Hero have armor?(y/n): ")
         while user_armor.isalpha() == False:
             user_armor = input("Does your Hero have armor?(y/n): ")
-        if user_armor.lower()[0] == "y":
-            while not user_armor.isnumeric():
-                armor_number = input("How many? ")
 
-            for _ in range(int(armor_number)):
-                hero.add_armor(self.create_armor())
+        if user_ability == "y":
+            hero.add_ability(self.create_ability())
+        if user_weapon == "y":
+            hero.add_ability(self.create_weapon())
+        if user_armor == "y":
+            hero.add_armor(self.create_armor)
+
+        #Shoutout to Jeric for helping me make my code neater
 
         return hero
 
     def build_team_one(self):
-        user_input = ""
-
         user_input = input("What's the name of team one? ")
-        name = user_input
-        self.team_one = Team(name)
-
-        user_input = ""
-        while not user_input.isnumeric():
-            user_input = input(f"How many heroes are on {name}? ")
-
-        for _ in range(int(user_input)):
-            self.team_one.add_hero(self.create_hero())
-
+        team_one = user_input
+        num_hero = int(input("How many memebers?: "))
+        for i in range(num_hero):
+            hero = self.create_hero()
+            team_one.add_hero(hero)
+        self.team_one = team_one   
     def build_team_two(self):
-        user_input = ""
-
         user_input = input("What's the name of team two? ")
-        name = user_input
-        self.team_two = Team(name)
-
-        user_input = ""
-        while not user_input.isnumeric():
-            user_input = input(f"How many heroes are on {name}? ")
-
-        for _ in range(int(user_input)):
-            self.team_two.add_hero(self.create_hero())
-    def team_battle(self):
-        atk = randint(1,2)
-        if atk == 1:
-            self.team_one.attack(self.team_two)
-        else:
-            self.team_two.attack(self.team_one)
+        team_two = user_input
+        num_hero = int(input("How many heroes?: "))
+        for i in range(num_hero):
+            hero = self.create_hero()
+            team_two.add_hero(hero)
+        self.team_two = team_two
     
+    def dead_team(self,team_alive):
+        team_deaths = 0
+        for hero in team_alive:
+            if hero.current_health == 0:
+                team_deaths += 1
+        if team_deaths == len(team_alive):
+            return True
+        else:
+            return False
+
+    def team_battle(self):
+        self.team_one.attack(self.team_two)
 
 
+    def show_stats(self):
+        team_one = self.team_dead(self.team_one.heroes)
+        team_two = self.team_dead(self.team_two.heroes)
 
+        if team_one == False:
+            print(f"Team {self.team_one.name} wins!")
+            print("Heroes remaning: ")
+            for hero in self.team_one.heroes:
+                if hero.is_alive():
+                    print(hero.name)
+        elif team_two == False:
+            print(f"Team {self.team_two.name} wins!")
+            print("Heroes remaining: ")
+            for hero in self.team_one.heroes:
+                if hero.is_alive():
+                    print(hero.name)
+                else:
+                    print("They're all dead!")
+        elif team_one == False and team_two == False:
+            print("Draw!")
 
-
-
-        
+        print(f"Team one KDR: {self.team_one.stats()}")  
+        print(f"Team two KDR: {self.team_two.stats()}")
 
 if __name__ == "__main__":
     # If you run this file from the terminal
