@@ -204,6 +204,42 @@ class Arena():
 
         return hero
 
+    def build_team_one(self):
+        user_input = ""
+
+        user_input = input("What's the name of team one? ")
+        name = user_input
+        self.team_one = Team(name)
+
+        user_input = ""
+        while not user_input.isnumeric():
+            user_input = input(f"How many heroes are on {name}? ")
+
+        for _ in range(int(user_input)):
+            self.team_one.add_hero(self.create_hero())
+
+    def build_team_two(self):
+        user_input = ""
+
+        user_input = input("What's the name of team two? ")
+        name = user_input
+        self.team_two = Team(name)
+
+        user_input = ""
+        while not user_input.isnumeric():
+            user_input = input(f"How many heroes are on {name}? ")
+
+        for _ in range(int(user_input)):
+            self.team_two.add_hero(self.create_hero())
+    def team_battle(self):
+        atk = randint(1,2)
+        if atk == 1:
+            self.team_one.attack(self.team_two)
+        else:
+            self.team_two.attack(self.team_one)
+    
+
+
 
 
 
